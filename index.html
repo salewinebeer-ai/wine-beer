@@ -299,5 +299,101 @@
         </tr>
     </table>
 
+
+	<!-- === ПОЧАТОК КОДУ ДЛЯ ВІДПОВІДНОСТІ ЗАКОНОДАВСТВУ === -->
+
+<!-- 1. Стилі для вікна перевірки віку та попередження -->
+<style>
+    /* Блокування екрану */
+    #age-gate {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+        z-index: 9999;
+        display: flex; /* Показуємо за замовчуванням */
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+
+    #age-gate h2 { color: #d4af37; font-size: 24px; margin-bottom: 20px; }
+    #age-gate p { font-size: 16px; margin-bottom: 30px; line-height: 1.5; color: #fff; }
+    
+    .age-btn {
+        padding: 15px 40px;
+        margin: 10px;
+        font-size: 18px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+    
+    .btn-yes { background-color: #d4af37; color: #000; }
+    .btn-no { background-color: #555; color: #fff; }
+
+    /* 2. Банер про шкоду алкоголю (Обов'язковий) */
+    .health-warning {
+        background-color: #000;
+        color: #fff;
+        text-align: center;
+        padding: 15px;
+        font-size: 12px;
+        text-transform: uppercase;
+        border-top: 2px solid #d4af37;
+        margin-top: 20px;
+    }
+</style>
+
+<!-- 2. Саме вікно перевірки віку -->
+<div id="age-gate">
+    <div style="max-width: 500px;">
+        <!-- Логотип (використовуємо ваше лого) -->
+        <img src="https://raw.githubusercontent.com/Bionerica/Bionerica/refs/heads/main/photo/SHANDRUK-logo.png" style="max-width: 200px; margin-bottom: 20px;">
+        
+        <h2>Вам виповнилося 18 років?</h2>
+        <p>Цей сайт призначений для професіоналів HoReCa та містить інформацію про алкогольні напої.<br>Будь ласка, підтвердіть свій вік.</p>
+        
+        <div>
+            <button class="age-btn btn-yes" onclick="confirmAge()">ТАК, МЕНІ Є 18</button>
+            <button class="age-btn btn-no" onclick="rejectAge()">НІ</button>
+        </div>
+        <p style="font-size: 12px; color: #777; margin-top: 20px;">Надмірне споживання алкоголю шкідливе для вашого здоров'я</p>
+    </div>
+</div>
+
+<!-- 3. Скрипт (Логіка роботи) -->
+<script>
+    // Функція перевірки при завантаженні
+    document.addEventListener("DOMContentLoaded", function() {
+        // Якщо користувач вже підтверджував вік раніше - ховаємо вікно
+        if (localStorage.getItem("ageConfirmed") === "true") {
+            document.getElementById("age-gate").style.display = "none";
+        }
+    });
+
+    // Якщо натиснули ТАК
+    function confirmAge() {
+        localStorage.setItem("ageConfirmed", "true"); // Запам'ятовуємо вибір
+        document.getElementById("age-gate").style.display = "none"; // Ховаємо вікно
+    }
+
+    // Якщо натиснули НІ
+    function rejectAge() {
+        window.location.href = "https://www.google.com"; // Перенаправляємо в Google
+    }
+</script>
+
+<!-- 4. Додаємо напис про шкоду здоров'ю в самий низ сторінки -->
+<div class="health-warning">
+    НАДМІРНЕ СПОЖИВАННЯ АЛКОГОЛЮ ШКІДЛИВЕ ДЛЯ ВАШОГО ЗДОРОВ'Я
+</div>
 </body>
+
 </html>
